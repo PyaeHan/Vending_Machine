@@ -16,8 +16,11 @@ class AuthController extends Controller
     /**
      * Initial Login
      */
-    public function index(): View
+    public function index(): View | RedirectResponse
     {
+        if (Auth()->user()) {
+            return redirect()->route('products.index');
+        }
         return view('auth.login');
     }
 
